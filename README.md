@@ -1,4 +1,4 @@
-# vynx.cfg
+# my-cfg
 
 My portable terminal setup — **zsh**, **Neovim**, and **tmux** in one repo. Clone
 it on a new machine, run one script, and everything is wired up.
@@ -26,8 +26,8 @@ the install script — you don't need to install them by hand.
 ## Setup
 
 ```bash
-git clone git@github.com:vynx/vynx.cfg.git ~/vynx.cfg
-cd ~/vynx.cfg
+git clone git@github.com:vyvnx/my-cfg.git ~/my-cfg
+cd ~/my-cfg
 ./install.sh
 ```
 
