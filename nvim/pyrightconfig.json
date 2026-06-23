@@ -1,0 +1,15 @@
+{
+  "typeCheckingMode": "basic",
+  "useLibraryCodeForTypes": true,
+  "reportMissingImports": "warning",
+  "reportMissingTypeStubs": "none",
+  "reportOptionalMemberAccess": "none",
+  "reportOptionalOperand": "none",
+  "reportOptionalSubscript": "none",
+  "reportUnusedVariable": "none",
+  "reportUnnecessaryTypeIgnoreComment": "none",
+  "reportPrivateImportUsage": "none",
+  "reportUnknownVariableType": "none",
+  "reportUnknownMemberType": "none"
+}
+

@@ -1,0 +1,8 @@
+# machine-specific shell env (kept out of git on purpose)
+.zshrc.local
+*.local
+
+# OS / editor cruft
+.DS_Store
+*.swp
+*~

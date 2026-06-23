@@ -1,0 +1,22 @@
+# ~/.zshrc.local — machine-specific environment (NOT tracked in git).
+# Copy this file to ~/.zshrc.local and uncomment / edit what this machine needs:
+#   cp zsh/.zshrc.local.example ~/.zshrc.local
+# It is sourced at the end of the portable ~/.zshrc.
+
+# --- Java ---
+# Point JAVA_HOME at this machine's JDK. The example below is a WSL path to a
+# Windows-installed JDK; on a native Linux box use e.g. /usr/lib/jvm/java-21.
+# export JAVA_HOME="/c/Program Files/Java/jdk-21"
+# export PATH="$JAVA_HOME/bin:$PATH"
+
+# --- CUDA (GPU machines only) ---
+# export PATH="/usr/local/cuda/bin:$PATH"
+# export LD_LIBRARY_PATH="/usr/local/cuda/lib64:$LD_LIBRARY_PATH"
+
+# --- opencode ---
+# export PATH="$HOME/.opencode/bin:$PATH"
+
+# --- pipx extra bin ---
+# NOTE: the original .zshrc used "$HOME/.local/binw" which looks like a typo for
+# "$HOME/.local/bin". Verify the real path on this machine before enabling.
+# export PATH="$PATH:$HOME/.local/bin"
