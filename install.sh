@@ -62,6 +62,33 @@ else
   echo "  ok: tpm present"
 fi
 
+# vim-plug — nvim's plugin manager. init.lua calls plug#begin, so this must exist
+# before nvim starts or it errors out. Same bootstrap pattern as oh-my-zsh/tpm above.
+PLUG_VIM="${XDG_DATA_HOME:-$HOME/.local/share}/nvim/site/autoload/plug.vim"
+if [ ! -f "$PLUG_VIM" ]; then
+  echo "Installing vim-plug..."
+  curl -fLo "$PLUG_VIM" --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+else
+  echo "  ok: vim-plug present"
+fi
+
+# install nvim plugins headlessly (replaces the manual :PlugInstall). --sync blocks
+# until done so +qall doesn't quit early. Mason servers/formatters and treesitter
+# parsers still finish on the first real launch.
+if command -v nvim >/dev/null 2>&1; then
+  echo "Syncing nvim plugins..."
+  nvim --headless +'PlugInstall --sync' +qall 2>/dev/null || true
+else
+  echo "  skip: nvim not found — install it, then run: nvim +'PlugInstall --sync' +qall"
+fi
+
+# install tmux plugins headlessly (replaces the manual prefix + I).
+if [ -x "$TPM_DIR/bin/install_plugins" ]; then
+  echo "Installing tmux plugins..."
+  "$TPM_DIR/bin/install_plugins" >/dev/null 2>&1 || true
+fi
+
 if [ ! -f "$HOME/.zshrc.local" ]; then
   echo
   echo "No ~/.zshrc.local yet. Create one for this machine:"
@@ -70,8 +97,6 @@ fi
 
 cat <<'EOF'
 
-Done. Next steps:
-  - exec zsh                          # reload your shell
-  - tmux, then press: prefix + I      # install tmux plugins via tpm
-  - open nvim                         # let the plugin manager sync
+Done. Plugins for nvim and tmux are installed. Last step:
+  - exec zsh    # reload your shell (can't be done for you — it's your live shell)
 EOF

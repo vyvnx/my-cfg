@@ -23,7 +23,9 @@ if [[ -n "$ip" ]]; then
   echo "$out" > "$cache"
   echo "$out"
 elif [[ -f "$cache" ]]; then
-  cat "$cache" # network hiccup, serve stale cache
+  touch "$cache" # network hiccup: serve stale cache, bump mtime so we don't curl again for max_age
+  cat "$cache"
 else
+  echo "offline" > "$cache" # cache the miss too, else every redraw re-curls while offline
   echo "offline"
 fi

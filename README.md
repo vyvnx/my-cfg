@@ -20,8 +20,9 @@ Install these first (package names vary by distro):
 - `git`, `zsh`, `tmux`
 - `nvim` (Neovim 0.9+)
 
-oh-my-zsh and **tpm** (the tmux plugin manager) are bootstrapped automatically by
-the install script — you don't need to install them by hand.
+oh-my-zsh, **tpm** (the tmux plugin manager), and **vim-plug** (the Neovim plugin
+manager) are bootstrapped automatically by the install script — along with all
+tmux and Neovim plugins. You don't need to install any of them by hand.
 
 ## Setup
 
@@ -32,8 +33,9 @@ cd ~/my-cfg
 ```
 
 `install.sh` is idempotent and safe to re-run. It symlinks each config into place
-(backing up anything already there to `~/.dotfiles-backup/<timestamp>/`), then
-clones oh-my-zsh and tpm if they're missing.
+(backing up anything already there to `~/.dotfiles-backup/<timestamp>/`), bootstraps
+oh-my-zsh, tpm, and vim-plug if they're missing, then installs the tmux and Neovim
+plugins headlessly (no manual `:PlugInstall` or `prefix + I` needed).
 
 ### Finish up
 
@@ -44,9 +46,9 @@ clones oh-my-zsh and tpm if they're missing.
    $EDITOR ~/.zshrc.local
    ```
 2. **Reload zsh:** `exec zsh`
-3. **tmux plugins:** start `tmux`, then press the prefix `Ctrl-Space` followed by
-   `I` (capital i) to install plugins into `~/.tmux/plugins/`.
-4. **Neovim:** open `nvim` and let the plugin manager finish syncing.
+
+> On the first real `nvim` launch, Mason finishes installing LSP servers and
+> formatters and treesitter compiles its parsers — just open a file and let it run.
 
 ## Notes
 
