@@ -27,7 +27,6 @@ Plug("nvim-treesitter/nvim-treesitter")
 Plug("windwp/nvim-ts-autotag")
 Plug("lukas-reineke/indent-blankline.nvim", { tag = "v3.8.2" })
 Plug("scottmckendry/cyberdream.nvim")
-Plug("ThePrimeagen/harpoon", { branch = "harpoon2" })
 Plug("christoomey/vim-tmux-navigator")
 Plug("nvim-tree/nvim-tree.lua")
 Plug("pmizio/typescript-tools.nvim")
@@ -59,6 +58,14 @@ vim.opt.backup = false
 vim.opt.writebackup = false
 vim.opt.undofile = true
 vim.opt.undodir = vim.fn.stdpath("state") .. "/undo//"
+
+-- code folding (treesitter-based, vscode-style collapse/expand)
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.opt.foldtext = ""
+vim.opt.foldlevel = 99
+vim.opt.foldlevelstart = 99
+vim.opt.foldnestmax = 4
 
 vim.cmd([[colorscheme cyberdream]])
 
@@ -108,6 +115,11 @@ vim.keymap.set("n", "<leader>w<", "5<C-w><", opts)
 vim.keymap.set("n", "<leader>w>", "5<C-w>>", opts)
 vim.keymap.set("n", "<leader>tk", "<C-w>t<C-w>K", opts)
 vim.keymap.set("n", "<leader>th", "<C-w>t<C-w>H", opts)
+
+-- folding: enter toggles a fold when on one, else acts as a normal <cr>
+vim.keymap.set("n", "<CR>", function()
+	return vim.fn.foldlevel(vim.fn.line(".")) > 0 and "za" or "<CR>"
+end, { expr = true, desc = "toggle fold / newline" })
 
 -- tmux navigator
 vim.keymap.set("n", "<C-h>", "<cmd>TmuxNavigateLeft<CR>", opts)
@@ -439,65 +451,6 @@ vim.keymap.set("n", "<C-f>", function()
 		vim.cmd(":%s/\\<" .. search .. "\\>/" .. replacement .. "/gIc")
 	end
 end, { desc = "replace word (prompted)" })
-
--- ============================================================================
--- harpoon
--- ============================================================================
-local harpoon = require("harpoon")
-harpoon:setup()
-
-local conf = require("telescope.config").values
-local function harpoon_telescope(harpoon_files)
-	local file_paths = {}
-	for _, item in ipairs(harpoon_files.items) do
-		table.insert(file_paths, item.value)
-	end
-
-	require("telescope.pickers")
-		.new({}, {
-			prompt_title = "Harpoon",
-			finder = require("telescope.finders").new_table({ results = file_paths }),
-			previewer = conf.file_previewer({}),
-			sorter = conf.generic_sorter({}),
-		})
-		:find()
-end
-
-vim.keymap.set("n", "<leader>ha", function()
-	harpoon:list():add()
-end, { desc = "harpoon add file" })
-
-vim.keymap.set("n", "<leader>hh", function()
-	harpoon.ui:toggle_quick_menu(harpoon:list())
-end, { desc = "harpoon quick menu" })
-
-vim.keymap.set("n", "<leader>ht", function()
-	harpoon_telescope(harpoon:list())
-end, { desc = "harpoon in telescope" })
-
-vim.keymap.set("n", "<leader>h1", function()
-	harpoon:list():select(1)
-end, { desc = "harpoon 1" })
-
-vim.keymap.set("n", "<leader>h2", function()
-	harpoon:list():select(2)
-end, { desc = "harpoon 2" })
-
-vim.keymap.set("n", "<leader>h3", function()
-	harpoon:list():select(3)
-end, { desc = "harpoon 3" })
-
-vim.keymap.set("n", "<leader>h4", function()
-	harpoon:list():select(4)
-end, { desc = "harpoon 4" })
-
-vim.keymap.set("n", "<leader>hp", function()
-	harpoon:list():prev()
-end, { desc = "harpoon prev" })
-
-vim.keymap.set("n", "<leader>hn", function()
-	harpoon:list():next()
-end, { desc = "harpoon next" })
 
 -- ============================================================================
 -- diagnostics helpers

@@ -38,6 +38,16 @@
 
 ---
 
+## 📂 Code Folding
+| Keybind | Description |
+|----------|-------------|
+| `<CR>` (Enter) | Toggle fold under cursor (open/close block) |
+| `zc` / `zo` | Close / open fold under cursor |
+| `zM` / `zR` | Close all / open all folds |
+| `zj` / `zk` | Jump to next / previous fold |
+
+---
+
 ## 🌳 File Explorer (nvim-tree)
 | Keybind | Description |
 |----------|-------------|
@@ -65,21 +75,6 @@
 |----------|-------------|
 | `<leader>ff` | Find files |
 | `<leader><leader>` | Live grep |
-
----
-
-## ⚓ Harpoon
-| Keybind | Description |
-|----------|-------------|
-| `<leader>ha` | Add file to Harpoon |
-| `<leader>hh` | Toggle quick menu |
-| `<leader>ht` | Open Harpoon in Telescope |
-| `<leader>h1` | Select Harpoon file 1 |
-| `<leader>h2` | Select Harpoon file 2 |
-| `<leader>h3` | Select Harpoon file 3 |
-| `<leader>h4` | Select Harpoon file 4 |
-| `<leader>hp` | Previous Harpoon file |
-| `<leader>hn` | Next Harpoon file |
 
 ---
 
