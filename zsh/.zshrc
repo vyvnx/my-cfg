@@ -29,6 +29,7 @@ export PATH="$PATH:/opt/nvim-linux64/bin"
 alias py="python3"
 alias pstart="python3 -m venv .venv && source .venv/bin/activate"
 alias nv="nvim ."
+alias dps='docker ps --format "table {{.ID}}\t{{.Names}}\t{{.Status}}\t{{.CreatedAt}}"'
 
 # --- Machine-specific overrides (not tracked in git) ---
 [ -f "$HOME/.zshrc.local" ] && source "$HOME/.zshrc.local"
