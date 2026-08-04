@@ -556,7 +556,7 @@ end, { desc = "open keybind cheat sheet" })
 -- ============================================================================
 -- lsp
 -- ============================================================================
-vim.lsp.set_log_level("error")
+vim.lsp.log.set_level("ERROR")
 
 require("mason").setup({ ui = { border = "rounded" } })
 
@@ -614,14 +614,19 @@ vim.lsp.config("pyright", {
 
 vim.lsp.enable({ "gopls", "pyright" })
 
+-- ponytail: company network blocks mason's downloads. set VYNX_NO_MASON=1 in
+-- ~/.zshrc.local there — mason still works on demand (:MasonInstall), it just
+-- stops auto-fetching at startup. servers already on PATH keep working.
+local mason_auto = vim.env.VYNX_NO_MASON ~= "1"
+
 require("mason-lspconfig").setup({
-	ensure_installed = {
+	ensure_installed = mason_auto and {
 		"pyright",
 		"clangd",
 		"gopls",
 		"tailwindcss",
 		"lua_ls",
-	},
+	} or {},
 })
 
 require("mason-tool-installer").setup({
@@ -637,7 +642,7 @@ require("mason-tool-installer").setup({
 		"tailwindcss-language-server",
 		"typescript-language-server",
 	},
-	run_on_start = true,
+	run_on_start = mason_auto,
 })
 pcall(function()
 	vim.lsp.enable("vuels", false)
