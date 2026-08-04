@@ -11,6 +11,7 @@
 | `<C-a>` | Select entire file |
 | `<C-f>` | Find and replace word (prompted) |
 | `<C-g>` | Go to definition (LSP) |
+| `<C-b>` | Jump back (jumplist) |
 | `<leader>q` | Save and quit window |
 | `<leader>qq` | Force quit window |
 | `kk` (insert) | Exit insert mode |

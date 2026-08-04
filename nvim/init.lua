@@ -93,6 +93,7 @@ vim.keymap.set("i", "kk", "<Esc>", opts)
 vim.keymap.set("n", "<C-s>", "<cmd>w!<CR>", opts)
 vim.keymap.set("n", "<M-s>", "<cmd>w!<CR>", opts)
 vim.keymap.set("n", "<C-g>", goto_definition, { noremap = true, silent = true, desc = "go to definition" })
+vim.keymap.set("n", "<C-b>", "<C-o>", { noremap = true, silent = true, desc = "jump back (jumplist)" })
 
 -- quit
 vim.keymap.set("n", "<leader>q", "<cmd>x<CR>", opts)
